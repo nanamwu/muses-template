@@ -125,6 +125,15 @@ header p:last-child {
   padding-left: 0.5rem;
 }
 
+main div {
+  background-color: rgb(73, 85, 114);
+  padding: 10px 5px;
+  border: 10px solid;
+  border-radius: 1rem;
+  color: white;
+  margin-bottom: 10px;
+}
+
 footer p {
   font-weight: bold;
   margin-bottom: 2rem;
