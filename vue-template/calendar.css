@@ -125,9 +125,49 @@ header p:last-child {
   padding-left: 0.5rem;
 }
 
-.calendar_zentai {
-  width: 100%;
-  height: auto;
+body {
+  font-family: Arial, sans-serif;
+}
+
+#calendar {
+  width: 80%;
+  margin: 20px auto;
+  display: grid;
+  grid-template-columns: 100px repeat(7, 1fr); /* 最初の列は時間スロット用 */
+  grid-auto-rows: minmax(50px, auto); /* 行の高さを自動調整 */
+  grid-gap: 10px;
+}
+
+.day,
+.time-slot,
+.time-header,
+.availability {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
+}
+
+.day {
+  background-color: #f0f0f0;
+}
+
+.time-slot,
+.availability {
+  cursor: pointer;
+}
+
+.time-slot:hover,
+.availability:hover {
+  background-color: #e0e0e0;
+}
+
+main p {
+  display: inline-block;
+  border: solid 1px black;
+  border-radius: 0.5rem;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: rgb(236, 236, 236);
 }
 
 main p {
