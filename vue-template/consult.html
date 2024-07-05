@@ -49,7 +49,7 @@
         </tr>
         <tr>
           <th>応対者</th>
-          <td>Aさん</td>
+          <td id="displayName"></td>
         </tr>
         <tr>
           <th>相談内容</th>
@@ -71,22 +71,22 @@
               ><input
                 type="radio"
                 name="radioGroup"
-                value="Radio 1"
+                value="【対面】"
               />【対面】</label
             >
             <label
               ><input
                 type="radio"
                 name="radioGroup"
-                value="Radio 2"
+                value="【Web】"
               />【Web】</label
             >
           </td>
         </tr>
       </table>
 
-      <button id="saveButton" type="button">次へ</button>
-      <button type="button">戻る</button>
+      <button onclick="location.href='./end.html'" id="nextButton">次へ</button>
+      <button onclick="history.back()">戻る</button>
     </main>
 
     <footer>
