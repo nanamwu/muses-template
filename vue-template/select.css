@@ -13,7 +13,7 @@ body {
 }
 
 header {
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
 }
 
 figure#logo {
@@ -125,9 +125,9 @@ header p:last-child {
   padding-left: 0.5rem;
 }
 
-main div {
-  background-color: rgb(73, 85, 114);
-  padding: 10px 5px;
+main td {
+  background-color: #3d6b99;
+  padding: 10px 15px;
   border: 10px solid;
   border-radius: 1rem;
   color: white;
@@ -137,6 +137,10 @@ main div {
 footer p {
   font-weight: bold;
   margin-bottom: 2rem;
+}
+
+footer div {
+  margin-top: 0.7rem;
 }
 
 #information {

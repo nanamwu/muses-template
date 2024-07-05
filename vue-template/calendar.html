@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>キャリア支援画面</title>
-    <link href="calendar_zentai.css" rel="stylesheet" />
+    <link href="calendar.css" rel="stylesheet" />
   </head>
   <body>
     <header>
@@ -42,11 +42,8 @@
     </header>
     <main>
       <p>全体の空き状況</p>
-      <img
-        src="img/calendar_zentai.JPG"
-        alt="全体の空き状況"
-        class="calendar_zentai"
-      />
+      <div id="calendar"></div>
+      <script src="script.js"></script>
     </main>
 
     <footer>
@@ -57,5 +54,9 @@
       <p>Information</p>
       <div id="information"></div>
     </footer>
+
+    <script src="https://unpkg.com/petite-vue"></script>
+    <script src="calendar.js"></script>
+  </body>
   </body>
 </html>
