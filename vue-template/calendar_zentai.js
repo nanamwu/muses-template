@@ -18,14 +18,31 @@ document.addEventListener("DOMContentLoaded", function () {
     "16:30-17:00",
   ];
 
+  // 今日の日付を取得
+  const today = new Date();
+  const startDay = today.getDay();
+  const startDate = today.getDate();
+
+  // 今日の曜日から始まる一週間の曜日を計算
+  const currentWeek = [];
+  for (let i = 0; i < 7; i++) {
+    const currentDay = (startDay + i) % 7;
+    const date = new Date(today);
+    date.setDate(startDate + i);
+    currentWeek.push({
+      day: daysOfWeek[currentDay],
+      date: date.getDate(),
+    });
+  }
+
   // ヘッダーを追加
   const emptyCell = document.createElement("div");
   calendar.appendChild(emptyCell);
 
-  daysOfWeek.forEach((day) => {
+  currentWeek.forEach((dayInfo) => {
     const dayDiv = document.createElement("div");
     dayDiv.className = "day";
-    dayDiv.innerText = day;
+    dayDiv.innerText = `${dayInfo.date} (${dayInfo.day})`;
     calendar.appendChild(dayDiv);
   });
 
@@ -41,9 +58,19 @@ document.addEventListener("DOMContentLoaded", function () {
       const availabilityDiv = document.createElement("div");
       availabilityDiv.className = "availability";
       availabilityDiv.innerText = availability;
-      availabilityDiv.addEventListener("click", () => {
-        alert(`予約時間: ${daysOfWeek[i]} ${slot} - ${availability}`);
-      });
+      if (availability === "○") {
+        availabilityDiv.classList.add("available");
+        availabilityDiv.addEventListener("click", () => {
+          const params = new URLSearchParams({
+            day: currentWeek[i].day,
+            date: currentWeek[i].date,
+            time: slot,
+          });
+          window.location.href = `consult.html?${params.toString()}`;
+        });
+      } else {
+        availabilityDiv.classList.add("unavailable"); // ×の場合は追加クラス
+      }
       calendar.appendChild(availabilityDiv);
     }
   });
