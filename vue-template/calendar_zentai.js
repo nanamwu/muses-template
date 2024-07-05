@@ -41,9 +41,18 @@ document.addEventListener("DOMContentLoaded", function () {
       const availabilityDiv = document.createElement("div");
       availabilityDiv.className = "availability";
       availabilityDiv.innerText = availability;
-      availabilityDiv.addEventListener("click", () => {
-        alert(`予約時間: ${daysOfWeek[i]} ${slot} - ${availability}`);
-      });
+      if (availability === "○") {
+        availabilityDiv.classList.add("available");
+        availabilityDiv.addEventListener("click", () => {
+          const params = new URLSearchParams({
+            day: daysOfWeek[i],
+            time: slot,
+          });
+          window.location.href = `consult.html?${params.toString()}`;
+        });
+      } else {
+        availabilityDiv.classList.add("unavailable"); // ×の場合は追加クラス
+      }
       calendar.appendChild(availabilityDiv);
     }
   });
