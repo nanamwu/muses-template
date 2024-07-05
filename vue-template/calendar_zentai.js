@@ -2,6 +2,8 @@
 
 document.addEventListener("DOMContentLoaded", function () {
   const calendar = document.getElementById("calendar");
+  const prevWeekButton = document.getElementById("prevWeek");
+  const nextWeekButton = document.getElementById("nextWeek");
   const daysOfWeek = ["日", "月", "火", "水", "木", "金", "土"];
   const timeSlots = [
     "09:10-09:40",
@@ -18,60 +20,86 @@ document.addEventListener("DOMContentLoaded", function () {
     "16:30-17:00",
   ];
 
-  // 今日の日付を取得
   const today = new Date();
-  const startDay = today.getDay();
-  const startDate = today.getDate();
+  let currentStartDate = new Date(today);
+  const oneMonthLater = new Date(today);
+  oneMonthLater.setMonth(oneMonthLater.getMonth() + 1);
 
-  // 今日の曜日から始まる一週間の曜日を計算
-  const currentWeek = [];
-  for (let i = 0; i < 7; i++) {
-    const currentDay = (startDay + i) % 7;
-    const date = new Date(today);
-    date.setDate(startDate + i);
-    currentWeek.push({
-      day: daysOfWeek[currentDay],
-      date: date.getDate(),
+  function renderCalendar(startDate) {
+    calendar.innerHTML = ""; // カレンダーをクリア
+
+    // 今日の曜日から始まる一週間の曜日を計算
+    const startDay = startDate.getDay();
+    const startDateNumber = startDate.getDate();
+    const currentWeek = [];
+    for (let i = 0; i < 7; i++) {
+      const currentDay = (startDay + i) % 7;
+      const date = new Date(startDate);
+      date.setDate(startDateNumber + i);
+      currentWeek.push({
+        day: daysOfWeek[currentDay],
+        month: date.getMonth() + 1, // 月は0から始まるので+1
+        date: date.getDate(),
+      });
+    }
+
+    // ヘッダーを追加
+    const emptyCell = document.createElement("div");
+    calendar.appendChild(emptyCell);
+
+    currentWeek.forEach((dayInfo) => {
+      const dayDiv = document.createElement("div");
+      dayDiv.className = "day";
+      dayDiv.innerText = `${dayInfo.month}/${dayInfo.date} (${dayInfo.day})`;
+      calendar.appendChild(dayDiv);
     });
+
+    // 時間スロットと空き情報を追加
+    timeSlots.forEach((slot) => {
+      const timeHeader = document.createElement("div");
+      timeHeader.className = "time-header";
+      timeHeader.innerText = slot;
+      calendar.appendChild(timeHeader);
+
+      for (let i = 0; i < 7; i++) {
+        const availability = Math.random() > 0.5 ? "○" : "×"; // ランダムに○または×を表示
+        const availabilityDiv = document.createElement("div");
+        availabilityDiv.className = "availability";
+        availabilityDiv.innerText = availability;
+        if (availability === "○") {
+          availabilityDiv.classList.add("available");
+          availabilityDiv.addEventListener("click", () => {
+            const params = new URLSearchParams({
+              day: currentWeek[i].day,
+              month: currentWeek[i].month,
+              date: currentWeek[i].date,
+              time: slot,
+            });
+            window.location.href = `consult.html?${params.toString()}`;
+          });
+        } else {
+          availabilityDiv.classList.add("unavailable"); // ×の場合は追加クラス
+        }
+        calendar.appendChild(availabilityDiv);
+      }
+    });
+
+    // ボタンの有効/無効を設定
+    prevWeekButton.disabled = startDate <= today;
+    nextWeekButton.disabled = startDate >= oneMonthLater;
   }
 
-  // ヘッダーを追加
-  const emptyCell = document.createElement("div");
-  calendar.appendChild(emptyCell);
-
-  currentWeek.forEach((dayInfo) => {
-    const dayDiv = document.createElement("div");
-    dayDiv.className = "day";
-    dayDiv.innerText = `${dayInfo.date} (${dayInfo.day})`;
-    calendar.appendChild(dayDiv);
+  prevWeekButton.addEventListener("click", () => {
+    currentStartDate.setDate(currentStartDate.getDate() - 7);
+    renderCalendar(currentStartDate);
   });
 
-  // 時間スロットと空き情報を追加
-  timeSlots.forEach((slot) => {
-    const timeHeader = document.createElement("div");
-    timeHeader.className = "time-header";
-    timeHeader.innerText = slot;
-    calendar.appendChild(timeHeader);
-
-    for (let i = 0; i < 7; i++) {
-      const availability = Math.random() > 0.5 ? "○" : "×"; // ランダムに○または×を表示
-      const availabilityDiv = document.createElement("div");
-      availabilityDiv.className = "availability";
-      availabilityDiv.innerText = availability;
-      if (availability === "○") {
-        availabilityDiv.classList.add("available");
-        availabilityDiv.addEventListener("click", () => {
-          const params = new URLSearchParams({
-            day: currentWeek[i].day,
-            date: currentWeek[i].date,
-            time: slot,
-          });
-          window.location.href = `consult.html?${params.toString()}`;
-        });
-      } else {
-        availabilityDiv.classList.add("unavailable"); // ×の場合は追加クラス
-      }
-      calendar.appendChild(availabilityDiv);
+  nextWeekButton.addEventListener("click", () => {
+    if (currentStartDate <= oneMonthLater) {
+      currentStartDate.setDate(currentStartDate.getDate() + 7);
+      renderCalendar(currentStartDate);
     }
   });
+
+  renderCalendar(currentStartDate); // 初期表示
 });
