@@ -54,7 +54,7 @@
         <tr>
           <th>相談内容</th>
           <td>
-            <select>
+            <select id="dropdown">
               <option selected disabled>相談内容を選んでください</option>
               <option>応募書類の書き方・添削(履歴書・ES等)</option>
               <option>就職活動の進め方(企業研究・求人内容等)</option>
@@ -67,13 +67,25 @@
               <option>インターンシップについて</option>
               <option>オンライン面接練習</option></select
             ><br />
-            <label><input type="radio" name="keisiki" />【対面】</label>
-            <label><input type="radio" name="keisiki" />【Web】</label>
+            <label
+              ><input
+                type="radio"
+                name="radioGroup"
+                value="Radio 1"
+              />【対面】</label
+            >
+            <label
+              ><input
+                type="radio"
+                name="radioGroup"
+                value="Radio 2"
+              />【Web】</label
+            >
           </td>
         </tr>
       </table>
 
-      <button type="button">次へ</button>
+      <button id="saveButton" type="button">次へ</button>
       <button type="button">戻る</button>
     </main>
 
@@ -85,5 +97,7 @@
       <p>Information</p>
       <div id="information"></div>
     </footer>
+
+    <script src="consult.js"></script>
   </body>
 </html>
