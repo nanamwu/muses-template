@@ -131,11 +131,11 @@ body {
 
 #calendar {
   width: 100%;
-  margin: 20px auto;
+  margin: 10px auto;
   display: grid;
-  grid-template-columns: 100px repeat(7, 1fr); /* 最初の列は時間スロット用 */
+  grid-template-columns: 80px repeat(7, 1fr); /* 最初の列は時間スロット用 */
   grid-auto-rows: minmax(50px, auto); /* 行の高さを自動調整 */
-  grid-gap: 10px;
+  grid-gap: 7px;
 }
 
 .day,
@@ -199,7 +199,7 @@ footer p {
 }
 
 .navigation button {
-  padding: 10px 20px;
+  padding: 5px 20px;
   margin: 0 10px;
   font-size: 16px;
 }
