@@ -44,17 +44,19 @@
     <main>
       <table id="outaisya">
         <tr>
-          <td onclick="window.location.href='calendar_zentai.html'">
+          <td
+            onclick="storeTextAndNavigate('指名なし', 'calendar_zentai.html')"
+          >
             指名なし　　　　　　　　　　　　　　　　　▶
           </td>
         </tr>
         <tr>
-          <td onclick="window.location.href='calendar_zentai.html'">
+          <td onclick="storeTextAndNavigate('Aさん', 'calendar_select.html')">
             Aさん　　　　　　　　　　　　　　　　　　 ▶
           </td>
         </tr>
         <tr>
-          <td onclick="window.location.href='calendar_zentai.html'">
+          <td onclick="storeTextAndNavigate('Bさん', 'calendar_select.html')">
             Bさん　　　　　　　　　　　　　　　　　　 ▶
           </td>
         </tr>
@@ -71,5 +73,11 @@
     </footer>
 
     <script src="select.js"></script>
+    <script>
+      function storeTextAndNavigate(text, url) {
+        localStorage.setItem("selectedText", text);
+        window.location.href = url;
+      }
+    </script>
   </body>
 </html>

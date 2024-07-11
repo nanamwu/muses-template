@@ -41,7 +41,7 @@
       <p>登録されていません</p>
     </header>
     <main>
-      <p>全体の空き状況</p>
+      
       <div id="calendar"></div>
       <div class="navigation">
         <button id="prevWeek">前へ</button>
@@ -61,6 +61,16 @@
 
     <script src="https://unpkg.com/petite-vue"></script>
     <script src="calendar_select.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+          const selectedText = localStorage.getItem('selectedText');
+          if (selectedText) {
+              const element = document.createElement('p');
+              element.textContent = selectedText;
+              document.querySelector('main').prepend(element);
+          }
+      });
+  </script>
   </body>
   </body>
 </html>
