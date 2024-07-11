@@ -151,6 +151,10 @@ body {
   background-color: #f0f0f0;
 }
 
+.time-header {
+  background-color: #ffffff; /* 背景色を白に設定 */
+}
+
 .time-slot,
 .availability {
   cursor: pointer;
