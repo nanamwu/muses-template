@@ -46,7 +46,6 @@ document.addEventListener("DOMContentLoaded", function () {
     // ヘッダーを追加
     const emptyCell = document.createElement("div");
     calendar.appendChild(emptyCell);
-
     currentWeek.forEach((dayInfo) => {
       const dayDiv = document.createElement("div");
       dayDiv.className = "day";
