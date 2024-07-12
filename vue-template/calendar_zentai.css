@@ -133,7 +133,7 @@ body {
   width: 100%;
   margin: 10px auto;
   display: grid;
-  grid-template-columns: 80px repeat(7, 1fr); /* 最初の列は時間スロット用 */
+  grid-template-columns: 70px repeat(7, 1fr); /* 最初の列は時間スロット用 */
   grid-auto-rows: minmax(50px, auto); /* 行の高さを自動調整 */
   grid-gap: 7px;
 }
