@@ -185,11 +185,9 @@ body {
 
 main p {
   display: inline-block;
-  border: solid 1px black;
   border-radius: 0.5rem;
-  padding-left: 10px;
-  padding-right: 10px;
-  background-color: rgb(236, 236, 236);
+  background-color: #ccddff;
+  padding: 5px 20px;
 }
 
 footer p {
@@ -213,10 +211,4 @@ footer p {
   padding: 5px 20px;
   margin: 0 10px;
   font-size: 16px;
-}
-
-main p {
-  background-color: #ccddff;
-  padding: 5px 20px;
-  border: none;
 }
