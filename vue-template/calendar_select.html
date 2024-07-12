@@ -67,6 +67,7 @@
           if (selectedText) {
               const element = document.createElement('p');
               element.textContent = selectedText;
+              element.classList.add('selected-text');
               document.querySelector('main').prepend(element);
           }
       });

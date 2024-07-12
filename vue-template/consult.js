@@ -22,3 +22,13 @@ document.getElementById("nextButton").addEventListener("click", function () {
   localStorage.setItem("selectedRadio", selectedRadio.value);
   window.location.href = "end.html"; // 次のページにリダイレクト
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+  const selectedText = localStorage.getItem("selectedText");
+  if (selectedText) {
+    const displayNameElement = document.getElementById("displayName");
+    if (displayNameElement) {
+      displayNameElement.textContent = selectedText;
+    }
+  }
+});
