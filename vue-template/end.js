@@ -18,3 +18,17 @@ document.addEventListener("DOMContentLoaded", function () {
       "選択されたラジオボタンはありません。";
   }
 });
+
+// script.jsファイル
+
+// ボタンの要素を取得
+const nextButton = document.getElementById("nextButton");
+
+// ボタンがクリックされたときの処理
+nextButton.addEventListener("click", function () {
+  // 次のページのURL
+  const nextPageURL = "end2.html";
+
+  // 次のページに移動
+  window.location.href = nextPageURL;
+});
