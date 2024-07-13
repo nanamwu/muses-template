@@ -20,7 +20,6 @@ document.getElementById("nextButton").addEventListener("click", function () {
 
   localStorage.setItem("selectedDropdown", selectedDropdown);
   localStorage.setItem("selectedRadio", selectedRadio.value);
-  window.location.href = "end.html"; // 次のページにリダイレクト
 });
 
 document.addEventListener("DOMContentLoaded", function () {
