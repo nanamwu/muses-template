@@ -43,3 +43,11 @@ document.addEventListener("DOMContentLoaded", function () {
   document.getElementById("displayDropdown").innerText = content;
   document.getElementById("displayRadio").innerText = method;
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+  const selectedText = localStorage.getItem("selectedText");
+  if (selectedText) {
+    const displayNameElement = document.getElementById("displayName");
+    displayNameElement.textContent = selectedText;
+  }
+});
