@@ -1,35 +1,53 @@
-document.getElementById("nextButton").addEventListener("click", function () {
-  const selectedDropdown = document.getElementById("dropdown").value;
-  const selectedRadio = document.querySelector(
-    'input[name="radioGroup"]:checked'
-  );
-
-  if (!selectedRadio) {
-    alert("ラジオボタンを選択してください。");
-    return;
-  }
-
-  const selectedName = localStorage.getItem("selectedName");
-
-  if (selectedName) {
-    document.getElementById("displayName").textContent = `${selectedName}`;
-  } else {
-    document.getElementById("displayName").textContent =
-      "選択された名前はありません。";
-  }
-
-  localStorage.setItem("selectedDropdown", selectedDropdown);
-  localStorage.setItem("selectedRadio", selectedRadio.value);
-});
-
 document.addEventListener("DOMContentLoaded", function () {
-  const selectedText = localStorage.getItem("selectedText");
-  if (selectedText) {
-    const displayNameElement = document.getElementById("displayName");
-    if (displayNameElement) {
-      displayNameElement.textContent = selectedText;
+  const nextButton = document.getElementById("nextButton");
+  nextButton.disabled = true; // 最初はボタンを無効にする
+
+  // 「次へ」ボタンのイベントリスナー
+  nextButton.addEventListener("click", function () {
+    const dropdown = document.getElementById("dropdown");
+    const selectedContent = dropdown.options[dropdown.selectedIndex].text;
+    const radioGroup = document.querySelector(
+      'input[name="radioGroup"]:checked'
+    );
+
+    if (selectedContent && radioGroup) {
+      const selectedDateTime =
+        document.getElementById("selectedDateTime").innerText;
+      const params = new URLSearchParams({
+        datetime: selectedDateTime,
+        content: selectedContent,
+        method: radioGroup.value,
+      });
+
+      window.location.href = `end.html?${params.toString()}`;
+    } else {
+      alert("相談内容と対応方法を選択してください。");
     }
+  });
+
+  // ドロップダウンとラジオボタンの選択状態を監視して、「次へ」ボタンの有効・無効を切り替える関数
+  function enableNextButton() {
+    const dropdown = document.getElementById("dropdown");
+    const radioGroup = document.querySelector(
+      'input[name="radioGroup"]:checked'
+    );
+
+    nextButton.disabled = !(dropdown.selectedIndex !== 0 && radioGroup);
   }
+
+  // ドロップダウンの変更時のイベントリスナー
+  document
+    .getElementById("dropdown")
+    .addEventListener("change", enableNextButton);
+
+  // ラジオボタンの変更時のイベントリスナー
+  const radioButtons = document.querySelectorAll('input[name="radioGroup"]');
+  radioButtons.forEach((radio) => {
+    radio.addEventListener("change", enableNextButton);
+  });
+
+  // 初期設定時にもチェックを行う
+  enableNextButton();
 });
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -41,20 +59,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const selectedDateTime = `${month}/${date} (${day}) ${time}`;
   document.getElementById("selectedDateTime").innerText = selectedDateTime;
-
-  document.getElementById("nextButton").addEventListener("click", function () {
-    const dropdown = document.getElementById("dropdown");
-    const selectedContent = dropdown.options[dropdown.selectedIndex].text;
-    const radioGroup = document.querySelector(
-      'input[name="radioGroup"]:checked'
-    ).value;
-
-    const params = new URLSearchParams({
-      datetime: selectedDateTime,
-      content: selectedContent,
-      method: radioGroup,
-    });
-
-    window.location.href = `end.html?${params.toString()}`;
-  });
+});
+document.addEventListener("DOMContentLoaded", function () {
+  const selectedText = localStorage.getItem("selectedText");
+  if (selectedText) {
+    const displayNameElement = document.getElementById("displayName");
+    if (displayNameElement) {
+      displayNameElement.textContent = selectedText;
+    }
+  }
 });
