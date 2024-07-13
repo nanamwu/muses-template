@@ -45,7 +45,7 @@
       <table border="1">
         <tr>
           <th>相談日時</th>
-          <td id="selectedDataTime"></td>
+          <td id="selectedDateTime"></td>
         </tr>
         <tr>
           <th>応対者</th>
@@ -99,5 +99,18 @@
     </footer>
 
     <script src="consult.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const params = new URLSearchParams(window.location.search);
+        const day = params.get("day");
+        const month = params.get("month");
+        const date = params.get("date");
+        const time = params.get("time");
+
+        const selectedDateTime = `${month}/${date} (${day}) ${time}`;
+        document.getElementById("selectedDateTime").innerText =
+          selectedDateTime;
+      });
+    </script>
   </body>
 </html>

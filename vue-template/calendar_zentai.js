@@ -1,5 +1,3 @@
-"use strict";
-
 document.addEventListener("DOMContentLoaded", function () {
   const calendar = document.getElementById("calendar");
   const prevWeekButton = document.getElementById("prevWeek");
