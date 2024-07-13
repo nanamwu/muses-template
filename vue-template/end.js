@@ -32,3 +32,14 @@ nextButton.addEventListener("click", function () {
   // 次のページに移動
   window.location.href = nextPageURL;
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+  const params = new URLSearchParams(window.location.search);
+  const datetime = params.get("datetime");
+  const content = params.get("content");
+  const method = params.get("method");
+
+  document.getElementById("displayDateTime").innerText = datetime;
+  document.getElementById("displayDropdown").innerText = content;
+  document.getElementById("displayRadio").innerText = method;
+});
